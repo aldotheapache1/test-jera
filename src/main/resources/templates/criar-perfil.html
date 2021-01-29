@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<title>Criar Perfil - Filmes</title>
+<meta charset="utf-8"/>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+	
+</head>
+<body>
+	<div class = "container">
+		<div class = "row">
+			<div class = "col-md-6 col-md-offset-3">
+			
+				<br>
+				<br>	
+				<br>
+				<br>	
+				<h3 class="text-center"> Crie seu novo perfil </h3>
+				<form th:action="@{/criar-perfil}" th:object="${user}" method="post" >
+					<div class = "form-group">
+						<label for ="name"> Nome </label> :
+						<input type="text" class = "form-control" id ="name" name = "name"
+						placeholder="Nome do perfil" autofocus="autofocus">
+						<input type="hidden" class = "form-control" id ="user" name = "user"
+						th:each = "user : ${users}" th:value="${user.id}" autofocus="autofocus">
+						
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3">
+								<input type="submit" name="submit" id="submit"
+									class="form-control btn btn-primary" value="Confimar" />
+							</div>
+						</div>
+					</div>
+				</form>
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>

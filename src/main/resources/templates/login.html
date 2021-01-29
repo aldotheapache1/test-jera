@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<title>Login - Filmes</title>
+<meta charset="utf-8"/>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+	
+</head>
+<body>
+	<div class = "container">
+		<div class = "row">
+			<div class = "col-md-6 col-md-offset-3">
+			
+				<br>
+				<br>	
+				<br>
+				<br>	
+				<h3 class="text-center"> Acesse e veja seus filmes </h3>
+				<form th:action="@{/login}" method="post">
+					
+					<!-- error message -->
+					<div th:if="${param.error}">
+						<div class="alert alert-danger">Usuário ou Senha inválidos.</div>
+					</div>
+				
+					<!-- logout message -->
+					<div th:if="${param.logout}">
+						<div class="alert alert-info">Você foi desconectado.</div>
+					</div>
+					
+					<div class = "form-group">
+						<label for ="username"> Email </label> :
+						<input type="text" class = "form-control" id ="username" name = "username"
+						placeholder="joao@email.com" autofocus="autofocus">
+					</div>
+					
+					<div class="form-group">
+						<label for="password">Senha</label>: <input type="password"
+							id="password" name="password" class="form-control"
+							placeholder="Insira sua senha" />
+					</div>
+					
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3">
+								<input type="submit" name="login-submit" id="login-submit"
+									class="form-control btn btn-primary" value="Entrar" />
+							</div>
+						</div>
+					</div>
+				</form>
+				<form class="form-group" th:action="@{/signin/facebook}" method="post">
+					<div class="row">
+						<div class="col-sm-6 col-sm-offset-3">
+						    <input type="hidden" name="scope" value="public_profile" />
+						    <input class="form-control btn btn-primary" type="submit" value="Continuar com o Facebook"/>
+						</div>
+					</div>
+				</form>
+				<div class="form-group text-center">
+						<span >Novo Usuário? <a href="/" th:href="@{/registration}">Cadastre-se</a></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

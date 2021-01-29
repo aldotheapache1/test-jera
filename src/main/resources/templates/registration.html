@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Cadastro de Usuário - Filmes</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+</head>
+<body>
+
+<br>
+<br>
+	<!-- Create HTML registration form -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+
+				<!-- success message -->
+				<div th:if="${param.success}">
+					<div class="alert alert-info">Você foi cadastrado com sucesso!</div>
+				</div>
+				<div th:if="${param.error}">
+					<div class="alert alert-danger">Esse email já está cadastrado!</div>
+				</div>
+				
+				<br>
+				<br>	
+				<br>
+				<br>	
+				<h3 class="text-center">Faça seu cadastro</h3>
+
+				<form th:action="@{/registration}" method="post" th:object="${user}">
+					<div class="form-group">
+						<label class="control-label" for="name"> Nome </label>
+						<input id="name"  class="form-control" th:field="*{name}"
+							required autofocus="autofocus" placeholder="Insira seu nome"/>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="birthDate"> Data de aniversário </label> <input
+							type="date"id="birthDate" class="form-control" th:field="*{birthDate}"
+							required autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="email"> Email </label> <input
+							id="email" type="email" class="form-control" th:field="*{email}" required
+							autofocus="autofocus" placeholder="Insira seu email" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="password"> Senha </label> <input
+							id="password" class="form-control" type="password"
+							th:field="*{password}" required autofocus="autofocus" placeholder="Insira seu insira uma senha para o cadastro"/>
+					</div>
+
+					<div class="form-group text-center">
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3">
+								<button type="submit" class="form-control btn btn-success">Cadastrar</button>
+							</div>
+						</div>
+						<span >Já possuí cadastro? <a href="/" th:href="@{/login}">Acesse por aqui</a></span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

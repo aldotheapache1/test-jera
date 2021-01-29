@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+	<title>Perfil - Filmes</title>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+		<style>
+			.card {
+		  		max-width: 13rem;
+			}
+		</style>
+		
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		  <a class="navbar-brand mb-2" href="/"><img alt="" src="https://3.bp.blogspot.com/--KLTTOSFTMk/UDM-qNRO4BI/AAAAAAAAB7U/h8_KmTfWXeU/s400/filmes2.png" width="50" height="50"></a>
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      			<li class="nav-item active">
+        			<a class="nav-link" th:href='@{/perfil/{idUser} (idUser=${idUser})}' >Perfil <span class="sr-only">(current)</span></a>
+      			</li>
+      		</ul>
+		    <form class="form-inline mr-5 mb-2" th:action="@{/busca}">
+		      <input class="form-control mr-sm-2" type="text" placeholder="O que procura?" th:name="search"  aria-label="Search" required>
+		      <input type="hidden" class="form-control" th:name="id" th:value="*{idUser}"/>
+		      <button class="btn btn-info my-2 my-sm-0" type="submit">Buscar</button>
+		    </form>
+		    <ul class="mt-2">
+		    	<li sec:authorize="isAuthenticated()" ><a class="btn btn-danger" href="/logout">Sair</a></li>
+		    </ul>
+  		 </div>
+		</nav>
+		<br>
+		<div class="container">
+			<h4 class="text-left">WatchList</h4>
+			<small class="text-muted">Ao adicionar filmes à watchlist eles aparecerão aqui.</small>
+			<br>
+			<div class="card-deck">
+				<a th:each = "item : ${watchList}"th:href='@{/filme/{id}/{idUser} (id=${item.id}, idUser=${idUser})}'  class="nav-link">
+				  	<div class="card border-secondary mb-3">
+				    	<img class="card-img-top" th:src="@{https://image.tmdb.org/t/p/original/{image}(image=${item.posterPath})}" alt="Card image cap">
+				    	<div class="card-body">
+				      		<h5 class="card-title text-center" th:text="${item.title}"></h5>
+				   		</div>
+				  	</div>
+				 </a>
+			</div> 
+			<h4 class="text-left" >Sugeridos</h4>
+			<small class="text-muted">Marque filmes como assistido, para ter sugestões.</small>
+		
+			<br>
+			<div class="card-deck">
+				<a th:each = "suggested : ${suggestedList}"th:href='@{/filme/{id}/{idUser} (id=${suggested.id}, idUser=${idUser})}'  class="nav-link">
+				  	<div class="card border-secondary mb-3">
+				    	<img class="card-img-top" th:src="@{https://image.tmdb.org/t/p/original/{image}(image=${suggested.posterPath})}" alt="Card image cap">
+				    	<div class="card-body">
+				      		<h5 class="card-title text-center" th:text="${suggested.title}"></h5>
+				   		</div>
+				  	</div>
+				 </a>
+			</div> 
+			<h4 class="text-left">Lista de descobrimento</h4>
+			<small class="text-muted">Aqui aparecem os filmes novos, que podem te interessar.</small>
+			<br>
+			<div class="card-deck">
+				<a th:each = "movie : ${movies}"th:href='@{/filme/{id}/{idUser} (id=${movie.id}, idUser=${idUser})}'  class="nav-link">
+				  	<div class="card border-secondary mb-3">
+				    	<img class="card-img-top" th:src="@{https://image.tmdb.org/t/p/original/{image}(image=${movie.posterPath})}" alt="Card image cap">
+				    	<div class="card-body">
+				      		<h5 class="card-title text-center" th:text="${movie.title}"></h5>
+				   		</div>
+				  	</div>
+				 </a>
+			</div> 
+		</div> 
+	</body>
+</html>
